@@ -28,3 +28,28 @@ module.exports.create = (req, res) => {
       res.status(500).send(err);
     });
 };
+
+
+module.exports.update = (req, res) => {
+  models.User.where({ id: req.body }).fetch()
+    .then(users => {
+      if(!users) {
+        throw users
+      }
+      return users.save({destination: req.body.destination, origin: req.body.origin, type: req.body.type, visible: req.body.visible}, {method: 'update'});
+    })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .error(err => {
+      res.status(500).send(err);
+    })
+    .catch(() => {
+      res.sendStatus(404);
+    });
+};
+
+
+
+
+

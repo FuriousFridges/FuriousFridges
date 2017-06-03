@@ -5,6 +5,7 @@ const UserController = require('../controllers').Users;
 
 router.route('/')
   .get(UserController.getAll)
+  .put(UserController.update)
   .post(UserController.create)
   ;
 
