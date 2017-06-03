@@ -42,9 +42,11 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-google-button": "^0.3.0-alpha",
+    "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
     "redis": "^2.7.1",
+    "redux": "^3.6.0",
     "request": "^2.81.0"
   },
   "devDependencies": {

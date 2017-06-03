@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './actionCreators';
 import {
   Link,
 } from 'react-router-dom';
@@ -55,7 +57,7 @@ class NewUserForm extends React.Component {
     this.handleVisibilityToggle = this.handleVisibilityToggle.bind(this);
   }
 
-  saveData() {
+
     // Save the form to the database
     // Convert destination and origin from their key value to the "value" value in CityData
     // (string) destination is at this.state.destinationValue
@@ -67,6 +69,23 @@ class NewUserForm extends React.Component {
     // (string) lastName is at this.state.lastName
     // (string) email is at this.state.email
     // (string) photo is at this.state.profilePic
+  saveData() {
+    axios.get('/createuser')
+      .then(res => {
+        this.props.dispatchCurrentUser(res.data)
+      });
+      .then(() => {
+        axios.put('/users', {
+          origin: this.state.originValue,
+          destination: this.state.destinationValue,
+          type: this.state.describeValue,
+          visible: this.state.visibility,
+          email: this.state.email
+        })
+        .then(res => {
+          console.log('FORM SAVED');
+        });
+      });
   }
 
   handleVisibilityToggle (event, input) {
@@ -375,4 +394,18 @@ class NewUserForm extends React.Component {
   }
 }
 
-export default NewUserForm;
+const mapStateToProps = (state) => ({ 
+  currentUser: state.currentUser
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchCurrentUser: (currentUser) => {
+      dispatch(setCurrentUser(currentUser));
+    }
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewUserForm);
+
