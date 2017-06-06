@@ -28,8 +28,5 @@
       "consumerSecret": "FILL_ME_IN",
       "callbackURL": "http://FILL_ME_IN/auth/twitter/callback"
     }
-  },
-  "Eventbrite": {
-    "clientID": "FILL_ME_IN"
   }
 }

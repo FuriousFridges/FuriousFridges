@@ -27,6 +27,5 @@ app.use('/cityinfo', routes.cityinfo);
 app.use('/users', routes.users);
 app.use('/questions', routes.questions);
 app.use('/answers', routes.answers);
-app.use('/events', routes.events);
 
 module.exports = app;
