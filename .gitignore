@@ -39,6 +39,3 @@ node_modules/
 bower_components/
 
 .idea/workspace.xml
-
-#API Keys
-/config/config.js

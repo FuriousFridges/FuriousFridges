@@ -32,6 +32,7 @@ module.exports.getAll = (req, res) => {
           } else {
             res.status(200).send(data.attributes.city_stats);
           }
+
         })
         .catch(err => {
           console.log(1, err);
