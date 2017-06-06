@@ -4,7 +4,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const request = require('request');
 const models = require('../../db/models');
-const config = require('config')['Eventbrite'];
+const config = require('config')['Evenbrite'];
 
 
 module.exports.getAll = (req, res) => {

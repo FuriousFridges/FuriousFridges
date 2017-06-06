@@ -29,7 +29,7 @@
       "callbackURL": "http://FILL_ME_IN/auth/twitter/callback"
     }
   },
-  "Eventbrite": {
+  "Evenbrite": {
     "clientID": "FILL_ME_IN"
   }
 }
