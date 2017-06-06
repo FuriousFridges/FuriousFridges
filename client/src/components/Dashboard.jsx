@@ -1,13 +1,16 @@
 import React from 'react';
-import EventCard from './EventCard.jsx';
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+    };
   }
   render () {
     return (
-      <EventCard />
+      <div>
+        Dashboard component
+      </div>
     );
   }
 }

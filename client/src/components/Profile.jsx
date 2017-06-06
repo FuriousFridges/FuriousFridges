@@ -62,11 +62,11 @@ class Profile extends React.Component {
         console.log('Logged in user: ', res.data);
         this.props.dispatchCurrentUser(res.data);
         this.setState({
-          firstName: res.data.firstName,
-          lastName: res.data.lastName,
+          firstName: res.data.first,
+          lastName: res.data.last,
           email: res.data.email,
           id: res.data.id,
-          profilePic: res.data.photoUrl,
+          profilePic: res.data.profile_pic,
           width: $(window).width(),
         });
       });
