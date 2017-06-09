@@ -28,4 +28,5 @@ export { setHousing,
          setStartUps,
          setVentureCapital,
          setPhotoURL,
-         setCity } from './cityInfoActions';
+         setCity, 
+         setScore } from './cityInfoActions';

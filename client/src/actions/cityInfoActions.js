@@ -77,3 +77,7 @@ export const setPhotoURL = (photoURL) => {
 export const setCity = (city) => {
   return { type: 'SET_CITY', payload: city };
 };
+
+export const setScore = (score) => {
+  return { type: 'SET_SCORE', payload: score };
+};

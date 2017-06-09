@@ -17,7 +17,8 @@ const DEFAULT_STATE = {
   business_freedom: 0,
   startups: 0,
   venture_capital: 0,
-  photoURL: ''
+  photoURL: '',
+  score: 0
   
 };
 
@@ -62,6 +63,8 @@ const cityInfoReducers = (state = DEFAULT_STATE, action) => {
     return Object.assign({}, state, { photoURL: action.payload });
   } else if (action.type === 'SET_CITY') {
     return Object.assign({}, state, { city: action.payload });
+  } else if (action.type === 'SET_SCORE') {
+    return Object.assign({}, state, { score: action.payload });
   }
   return state;
 };

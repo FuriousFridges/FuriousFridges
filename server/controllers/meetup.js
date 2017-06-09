@@ -11,7 +11,6 @@ module.exports.getAll = (req, res) => {
     .then((result) => {
       models.Stats.where({ city: result.attributes.destination }).fetch()
         .then((data) => {
-         
           request.get('https://api.meetup.com/2/concierge?zip=94103&offset=0&format=json&photo-host=secure&page=500&fields=group_photo&sig_id=128876412&sig=8f5b141f9cc7f7931f6f8a60911ca888af0ddde6', 
             (error, response, body) => {
               if (error) {

@@ -30,7 +30,28 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import ExpandTransition from 'material-ui/internal/ExpandTransition';
 import CircularProgress from 'material-ui/CircularProgress';
-
+import CityOptions from '../CityOptions.json';
+import { setHousing,
+         setCol,
+         setHealthcare,
+         setEnvironmentalQuality,
+         setEconomy,
+         setLeisure,
+         setCommute,
+         setSafety,
+         setEducation,
+         setSummary,
+         setTravelConnectivity,
+         setInternetAccess,
+         setTolerance,
+         setOutdoors,
+         setTaxation,
+         setBusinessFreedom,
+         setStartUps,
+         setVentureCapital,
+         setPhotoURL,
+         setCity,
+         setScore } from '../actions';
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -95,16 +116,49 @@ class Profile extends React.Component {
       });
   }
 
+  objectKeyByValue (obj, val) {
+    if ( typeof val === 'undefined' ) {
+      return [''];
+    }
+    return Object.entries(obj).find(i => i[1] === val);
+  }
+
+
   getCityInfo() {
     axios.get('/cityinfo')
+      .then(res => {
+        this.props.dispatchHousing(res.data.categories[0].score_out_of_10);
+        this.props.dispatchCol(res.data.categories[1].score_out_of_10);
+        this.props.dispatchHealthcare(res.data.categories[8].score_out_of_10);
+        this.props.dispatchEnvironmentalQuality(res.data.categories[10].score_out_of_10);
+        this.props.dispatchEconomy(res.data.categories[11].score_out_of_10);
+        this.props.dispatchLeisure(res.data.categories[14].score_out_of_10);
+        this.props.dispatchCommute(res.data.categories[5].score_out_of_10);
+        this.props.dispatchSafety(res.data.categories[7].score_out_of_10);
+        this.props.dispatchEducation(res.data.categories[9].score_out_of_10);
+        this.props.dispatchSummary(res.data.summary.replace(/<\/?[^>]+(>|$)/g, ''));
+        this.props.dispatchTravelConnectivity(res.data.categories[4].score_out_of_10);
+        this.props.dispatchInternetAccess(res.data.categories[13].score_out_of_10);
+        this.props.dispatchTolerance(res.data.categories[15].score_out_of_10);
+        this.props.dispatchSafety(res.data.categories[7].score_out_of_10);
+        this.props.dispatchOutdoors(res.data.categories[16].score_out_of_10);
+        this.props.dispatchTaxation(res.data.categories[12].score_out_of_10);
+        this.props.dispatchBusinessFreedom(res.data.categories[6].score_out_of_10);
+        this.props.dispatchStartUps(res.data.categories[2].score_out_of_10);
+        this.props.dispatchVentureCapital(res.data.categories[3].score_out_of_10);
+        this.props.dispatchScore(res.data.teleport_city_score);
+      })
       .catch(err => {
         if (err.message.includes('404')) {
           console.log('USER HAS NOT REGISTERED DESTINATION CITY');
-          setTimeout(() => {
-            this.props.history.push('/form');
-          }, 1000);
+          this.props.history.push('/form');
         }
-      }); 
+      });
+    axios.get('/cityphoto')
+      .then(res => {
+        this.props.dispatchPhotoURL(res.data.photos[0].image.web);
+      });
+    this.props.dispatchCity(this.objectKeyByValue(CityOptions, this.props.destinationCity)[0]); 
   }
 
 
@@ -171,14 +225,14 @@ class Profile extends React.Component {
     // Add question here
   }
   handleOriginChange (event, index, value) {
-    console.log("The origin changed");
+    console.log('The origin changed');
     this.setState({
       originValue: value,
     });
   }
 
   handleDestinationChange (event, index, value) {
-    console.log("The destination changed");
+    console.log('The destination changed');
     this.setState({
       destinationValue: value,
     });
@@ -248,7 +302,7 @@ class Profile extends React.Component {
       return (
         <div>
           <MuiThemeProvider>  
-            <CircularProgress size={120} thickness={8} style={{'margin-left': '50%', 'left': '-65px', 'margin-top': '100px'}} />
+            <CircularProgress size={120} thickness={8} style={{'marginLeft': '50%', 'left': '-65px', 'marginTop': '100px'}} />
           </MuiThemeProvider>
         </div>
       );
@@ -419,17 +473,104 @@ class Profile extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.questionBoard.currentUser
+
+
+const mapStateToProps = (state) => ({ 
+  currentUser: state.questionBoard.currentUser,
+  housing: state.cityInfo.housing,
+  col: state.cityInfo.col,
+  health_care: state.cityInfo.health_care,
+  environmental_quality: state.cityInfo.environmental_quality,
+  economy: state.cityInfo.economy,
+  leisure: state.cityInfo.leisure,
+  commute: state.cityInfo.commute, 
+  safety: state.cityInfo.safety,
+  education: state.cityInfo.education,
+  summary: state.cityInfo.summary,
+  travel_connectivity: state.cityInfo.travel_connectivity,
+  internet_access: state.cityInfo.internet_access,
+  tolerance: state.cityInfo.tolerance,
+  outdoors: state.cityInfo.outdoors,
+  taxation: state.cityInfo.taxation, 
+  business_freedom: state.cityInfo.business_freedom,
+  startups: state.cityInfo.startups,
+  venture_capital: state.cityInfo.venture_capital,
+  photoURL: state.cityInfo.photoURL,
+  city: state.cityInfo.city,
+  score: state.cityInfo.score
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    dispatchHousing: (housing) => {
+      dispatch(setHousing(housing));
+    },
+    dispatchCol: (col) => {
+      dispatch(setCol(col));
+    },
+    dispatchHealthcare: (health_care) => {
+      dispatch(setHealthcare(health_care));
+    },
+    dispatchEnvironmentalQuality: (environmental_quality) => {
+      dispatch(setEnvironmentalQuality(environmental_quality));
+    },
+    dispatchEconomy: (economy) => {
+      dispatch(setEconomy(economy));
+    },
+    dispatchLeisure: (leisure) => {
+      dispatch(setLeisure(leisure));
+    },
+    dispatchCommute: (commute) => {
+      dispatch(setCommute(commute));
+    },
+    dispatchSafety: (safety) => {
+      dispatch(setSafety(safety));
+    },
+    dispatchEducation: (education) => {
+      dispatch(setEducation(education));
+    },
+    dispatchSummary: (summary) => {
+      dispatch(setSummary(summary));
+    },
+    dispatchTravelConnectivity: (travel_connectivity) => {
+      dispatch(setTravelConnectivity(travel_connectivity));
+    },
+    dispatchInternetAccess: (internet_access) => {
+      dispatch(setInternetAccess(internet_access));
+    },
+    dispatchTolerance: (tolerance) => {
+      dispatch(setTolerance(tolerance));
+    },
+    dispatchOutdoors: (outdoors) => {
+      dispatch(setOutdoors(outdoors));
+    },
+    dispatchTaxation: (taxation) => {
+      dispatch(setTaxation(taxation));
+    },
+    dispatchBusinessFreedom: (business_freedom) => {
+      dispatch(setBusinessFreedom(business_freedom));
+    },
+    dispatchStartUps: (startups) => {
+      dispatch(setStartUps(startups));
+    },
+    dispatchVentureCapital: (venture_capital) => {
+      dispatch(setVentureCapital(venture_capital));
+    },
+    dispatchPhotoURL: (photoURL) => {
+      dispatch(setPhotoURL(photoURL));
+    },
+    dispatchCity: (city) => {
+      dispatch(setCity(city));
+    },
+    dispatchScore: (score) => {
+      dispatch(setCity(score));
+    },
     dispatchCurrentUser: (currentUser) => {
       dispatch(setCurrentUser(currentUser));
     }
   };
 };
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

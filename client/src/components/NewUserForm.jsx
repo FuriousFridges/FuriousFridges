@@ -54,19 +54,7 @@ class NewUserForm extends React.Component {
     this.saveData = this.saveData.bind(this);
     this.handleVisibilityToggle = this.handleVisibilityToggle.bind(this);
   }
-
-
-    // Save the form to the database
-    // Convert destination and origin from their key value to the "value" value in CityData
-    // (string) destination is at this.state.destinationValue
-    // (string) origin is at this.state.originValue
-    // (string) describe is at this.state.describeValue
-    // (boolean) visibility is at this.state.visibility
-    // (int) user id is at this.state.id
-    // (string) firstName is at this.state.firstName
-    // (string) lastName is at this.state.lastName
-    // (string) email is at this.state.email
-    // (string) photo is at this.state.profilePic
+  
   saveData() {
     axios.put('/users', {
       origin: this.state.originValue,

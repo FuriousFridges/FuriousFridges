@@ -15,28 +15,29 @@ module.exports.getAll = (req, res) => {
             (error, response, body) => {
               if (error) {
                 console.error(error);
-              }
-              body = JSON.parse(body);
-              var events = body.events;
-              var eventData = {};
-              var dataLength = 10;
-              var currentIndex = 0;
-              var validData = true;
-              while (dataLength > 0 && validData) {
-                var eventObj = {};
-                eventObj['description'] = events[currentIndex].name.text;
-                eventObj['url'] = events[currentIndex].url;
-                if (events[currentIndex].logo) {
-                  eventObj['img'] = events[currentIndex].logo.url;
-                  eventData[currentIndex] = eventObj;
-                  dataLength--;
+              } else {
+                body = JSON.parse(body);
+                var events = body.events;
+                var eventData = {};
+                var dataLength = 10;
+                var currentIndex = 0;
+                var validData = true;
+                while (dataLength > 0 && validData) {
+                  var eventObj = {};
+                  eventObj['description'] = events[currentIndex].name.text;
+                  eventObj['url'] = events[currentIndex].url;
+                  if (events[currentIndex].logo) {
+                    eventObj['img'] = events[currentIndex].logo.url;
+                    eventData[currentIndex] = eventObj;
+                    dataLength--;
+                  }
+                  if (!events[currentIndex + 1]) {
+                    validData = false;
+                  }
+                  currentIndex++;
                 }
-                if (!events[currentIndex + 1]) {
-                  validData = false;
-                }
-                currentIndex++;
+                res.send(eventData);     
               }
-              res.send(eventData);
             });
           
         });

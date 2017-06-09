@@ -17,7 +17,7 @@ class EventCard extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillReceiveProps() {
     axios.get('/events')
       .then(res => {
         var sample = [];
