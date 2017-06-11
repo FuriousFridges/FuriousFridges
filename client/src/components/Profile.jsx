@@ -48,7 +48,7 @@ class Profile extends React.Component {
       loading: false,
       spinner: true
     };
-    
+
     this.handleToggle = this.handleToggle.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.handleVisibility = this.handleVisibility.bind(this);
@@ -85,13 +85,13 @@ class Profile extends React.Component {
     var options = {
       enableHighAccuracy: false,
       timeout: 5000,
-      maximumWait: 10000,     // max wait time for desired accuracy 
-      maximumAge: 0,          // disable cache 
-      desiredAccuracy: 30,    // meters 
-      fallbackToIP: true,     // fallback to IP if Geolocation fails or rejected 
-      addressLookup: true,    // requires Google API key if true 
-      timezone: false,         // requires Google API key if true 
-      staticMap: false        // map image URL (boolean or options object) 
+      maximumWait: 10000,     // max wait time for desired accuracy
+      maximumAge: 0,          // disable cache
+      desiredAccuracy: 30,    // meters
+      fallbackToIP: true,     // fallback to IP if Geolocation fails or rejected
+      addressLookup: true,    // requires Google API key if true
+      timezone: false,         // requires Google API key if true
+      staticMap: false        // map image URL (boolean or options object)
     };
     geolocator.locate(options, (err, location) => {
       if (err) { return console.log(err); }
@@ -110,7 +110,7 @@ class Profile extends React.Component {
       } else {
         cityStateCountry = 'No location data';
       }
-      
+
       axios.put('/users', {
         'current-location': cityStateCountry,
         email: this.props.currentUser.email
@@ -228,7 +228,7 @@ class Profile extends React.Component {
           }));
         }
       });
-    this.setState({snackBar: true, open: false});
+    this.setState({snackBar: true, open: false}, this.getCityInfo);
   }
   handleClose () {
     this.setState({snackBar: false});
