@@ -85,6 +85,7 @@ class COLComparisonCard extends React.Component {
   }
 
   render() {
+    const color = this.calculateColor();
     const styles = {
       growStyle: {
         flexGrow: 1,
@@ -93,7 +94,7 @@ class COLComparisonCard extends React.Component {
         minWidth: 200,
         height: 150,
         position: 'relative',
-        backgroundColor: this.calculateColor(),
+        backgroundColor: color,
       },
       cutOffText: {
         right: -12,
@@ -104,7 +105,7 @@ class COLComparisonCard extends React.Component {
         fontSize: '5em'
       },
       card: {
-        backgroundColor: this.calculateColor(),
+        backgroundColor: color,
         margin: 8,
         overflow: 'hidden',
       }
@@ -122,7 +123,7 @@ class COLComparisonCard extends React.Component {
               leftAvatar={
                 <Avatar
                 icon={<EditorAttachMoney/>}
-                backgroundColor={this.calculateColor()}
+                backgroundColor={color}
                 />
               }
             />

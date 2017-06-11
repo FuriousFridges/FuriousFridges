@@ -56,6 +56,7 @@ class CityInfo extends React.Component {
       colArray: [],
       climate: [],
       housingArray: [],
+      citySize: [],
     };
     this.calculateColor = this.calculateColor.bind(this);
     this.calculateScoreStatus = this.calculateScoreStatus.bind(this);
@@ -151,6 +152,14 @@ class CityInfo extends React.Component {
       .then(res => {
         this.setState({
           housingArray: res.data[0].data,
+        });
+      });
+    axios.get('/teleport', {
+      params: { category: 'CITY-SIZE' }
+    })
+      .then(res => {
+        this.setState({
+          citySize: res.data[0].data,
         });
       });
     axios.get('/cityphoto')
@@ -563,15 +572,15 @@ class CityInfo extends React.Component {
                   style={styles.growStyle}>
                   <MuiThemeProvider>
                     <Card
-                      style={{margin: 8, backgroundColor: pinkA200, overflow: 'hidden'}}>
+                      style={{margin: 8, backgroundColor: house.type !== 'float' ? pinkA200 : this.calculateColor(house.float_value * 10), overflow: 'hidden'}}>
                       <ListItem
                         primaryText={house.label}
-                        secondaryText='City Center'
+                        secondaryText={house.type !== 'float' ? 'City Center' : this.calculateScoreStatus(house.float_value * 10)}
                         disabled={true}
                         style={{backgroundColor: grey50}}
                       />
                       <CardText
-                        style={{minWidth: 200, height: this.props.width > 750 ? 150 : 100, position: 'relative', backgroundColor: pinkA200}}>
+                        style={{minWidth: 200, height: this.props.width > 750 ? 150 : 100, position: 'relative', backgroundColor: house.type !== 'float' ? pinkA200 : this.calculateColor(house.float_value*10)}}>
                         <span
                           style={{right: -12, bottom: -40, position: 'absolute', fontFamily: "'Roboto Light', sans-serif", color: grey50, fontSize: '5em'}}>
                           {house.float_value || '$' + house.currency_dollar_value}
@@ -583,6 +592,31 @@ class CityInfo extends React.Component {
               ) :
               <span>
                 There is no housing information.
+              </span>
+            }
+            <div style={styles.emptyStyle}/>
+          </div>
+        </div>
+        <div
+          style={{padding: '20px', backgroundColor: blueGrey500}}>
+          <span
+            style={styles.subHeaderStyle}>
+            City Size
+          </span>
+        </div>
+        <div
+          style={styles.flexStyle}>
+          <div
+            style={styles.centerStyle}>
+            {
+              context.state.citySize.length > 0 ? context.state.citySize.map((city, index) =>
+                <div
+                  style={styles.growStyle}>
+                  {city.float_value}
+                </div>
+              ) :
+                <span>
+                There is no city size information.
               </span>
             }
             <div style={styles.emptyStyle}/>
