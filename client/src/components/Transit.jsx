@@ -16,28 +16,28 @@ import {
 } from 'material-ui/styles/colors';
 
 
-class Restaurants extends React.Component {
+class Transit extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      restaurants: []
+      stations: []
     };
   }
  
   componentWillReceiveProps() {
-    axios.get('/restaurants')
+    axios.get('/transit')
       .then(res => {
         var sample = [];
         for (var key in res.data) {
           sample.push(res.data[key]);
         }
-        this.setState({restaurants: sample});
+        this.setState({stations: sample});
       });
   }
 
   render() {
-    let restaurants = Object.entries(this.state.restaurants);
+    let stations = Object.entries(this.state.stations);
     
     const styles = {
       card: {
@@ -65,23 +65,23 @@ class Restaurants extends React.Component {
         <Card
           style={styles.card}>
           <CardHeader
-            title='Find Great Eats!'
-            subtitle={'Explore the best restaurants'}
+            title="Find public transportation!"
+            subtitle={'locate nearby transit stations'}
           />
           <Divider/>
           <GridList
             cellHeight={100}
             style={styles.gridList}
           >
-            {restaurants.map((restaurant) => (
+            {stations.map((station) => (
               <GridTile
-                title={restaurant[1].name}
-                subtitle={"rating: " + restaurant[1].rating}
+                title={station[1].name}
+                subtitle={"type: " + station[1].type}
                 cols = {2}
                 rows = {2} 
               >
-               <a target="_blank">
-                  <img src = {restaurant[1].image} />
+                 <a target="_blank">
+                  <img src = {station[1].image} />
                 </a>
               </GridTile>
             ))}
@@ -92,4 +92,4 @@ class Restaurants extends React.Component {
   }
 }
 
-export default Restaurants;
+export default Transit;

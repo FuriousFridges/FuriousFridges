@@ -35,5 +35,8 @@
   },
   "Google_Coords": {
     "clientID": "FILL_ME_IN"
+  }, 
+   "Google": {
+    "APIKey": "FILL_ME_IN"
   }
 }

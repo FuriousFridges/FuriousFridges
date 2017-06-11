@@ -30,5 +30,6 @@
   "Eventbrite": {},
   "Meetups": {},
   "Google_Places": {},
-  "Google_Coords": {}
+  "Google_Coords": {},
+  "Google": {}
 }

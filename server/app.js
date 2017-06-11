@@ -33,6 +33,6 @@ app.use('/meetup', routes.meetup);
 app.use('/restaurants', routes.restaurants);
 app.use('/teleport', routes.teleport);
 app.use('/origininfo', routes.origininfo);
-
+app.use('/transit', routes.transit);
 
 module.exports = app;
