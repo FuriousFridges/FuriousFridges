@@ -39,7 +39,7 @@ class NewUserForm extends React.Component {
       finished: false,
       stepIndex: 0,
       originValue: 'albuquerque',
-      destinationValue: 'anchorage',
+      destinationValue: 'atlanta',
       describeValue: 'single',
       visibility: true,
     };
