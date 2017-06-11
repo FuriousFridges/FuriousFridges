@@ -55,6 +55,7 @@ class CityInfo extends React.Component {
       score: 0,
       colArray: [],
       climate: [],
+      housingArray: [],
     };
     this.calculateColor = this.calculateColor.bind(this);
     this.calculateScoreStatus = this.calculateScoreStatus.bind(this);
@@ -136,6 +137,7 @@ class CityInfo extends React.Component {
           score: cityInfo.teleport_city_score,
           colArray: cityDetails.categories[3].data.slice(1, cityDetails.categories[3].data.length),
           climate: cityDetails.categories[2].data.slice(0, cityDetails.categories[2].data.length - 2),
+          housingArray: cityDetails.categories[8].data,
         });
       })
       .catch(err => {
@@ -527,6 +529,45 @@ class CityInfo extends React.Component {
                         <span
                           style={{right: -12, bottom: -40, position: 'absolute', fontFamily: "'Roboto Light', sans-serif", color: grey50, fontSize: '5em'}}>
                           {context.convertFormat(climateData.label, climateData[climateData.type+'_value'])}
+                        </span>
+                      </CardText>
+                    </Card>
+                  </MuiThemeProvider>
+                </div>
+              )
+            }
+            <div style={styles.emptyStyle}/>
+          </div>
+        </div>
+        <div
+          style={{padding: '20px', backgroundColor: blueGrey500}}>
+          <span
+            style={styles.subHeaderStyle}>
+            Housing
+          </span>
+        </div>
+        <div
+          style={styles.flexStyle}>
+          <div
+            style={styles.centerStyle}>
+            {
+              context.state.housingArray.map((house, index) =>
+                <div
+                  style={styles.growStyle}>
+                  <MuiThemeProvider>
+                    <Card
+                      style={{margin: 8, backgroundColor: green500, overflow: 'hidden'}}>
+                      <ListItem
+                        primaryText={house.label}
+                        secondaryText='City Center'
+                        disabled={true}
+                        style={{backgroundColor: grey50}}
+                      />
+                      <CardText
+                        style={{minWidth: 200, height: this.props.width > 750 ? 150 : 100, position: 'relative', backgroundColor: green500}}>
+                        <span
+                          style={{right: -12, bottom: -40, position: 'absolute', fontFamily: "'Roboto Light', sans-serif", color: grey50, fontSize: '5em'}}>
+                          {house.float_value || '$' + house.currency_dollar_value}
                         </span>
                       </CardText>
                     </Card>
