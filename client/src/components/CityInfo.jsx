@@ -24,9 +24,10 @@ import SocialPerson from 'material-ui/svg-icons/social/person';
 import CityOptions from '../CityOptions.json';
 import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
 import Chip from 'material-ui/Chip';
 import {
-  blueGrey500, blueGrey700, blueGrey300, red500, orange500, amber500, lightGreen500, green500, grey500, pinkA200, grey50, blue500, cyan500, indigo500, lightBlue500
+  blueGrey500, blueGrey700, blueGrey300, red500, orange500, amber500, lightGreen500, green500, grey500, pinkA200, grey50, blue500, cyan500, indigo500, lightBlue500, grey800, grey600
 } from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
 
@@ -95,16 +96,28 @@ class CityInfo extends React.Component {
       return grey500;
     }
   }
-  calculateScoreStatus (score) {
+  calculateScoreStatus (score, index) {
     if ( score > 8 ) {
+      if ( index ) {
+        return 'Most affordable';
+      }
       return 'Among the best';
     } else if ( score > 6 ) {
+      if ( index ) {
+        return 'Somewhat affordable';
+      }
       return 'Above Average';
     } else if ( score > 4.5 ) {
       return 'Around Average';
     } else if ( score > 3 ) {
+      if ( index ) {
+        return 'Somewhat unaffordable';
+      }
       return 'Below Average';
     } else if ( score > 0 ) {
+      if ( index ) {
+        return 'Most unaffordable';
+      }
       return 'Among the worst';
     } else {
       return 'Not Available';
@@ -197,7 +210,7 @@ class CityInfo extends React.Component {
         flexGrow: 1,
       },
       centerStyle: {
-        width: '90%',
+        width: '80%',
         display: 'flex',
         flexFlow: 'row wrap',
         justifyContent: 'center',
@@ -233,8 +246,8 @@ class CityInfo extends React.Component {
         background: 'rgba(0, 0, 0, 0.4)'
       },
       textMargin: {
-        marginLeft: '5vw',
-        marginRight: '5vw',
+        marginLeft: '10vw',
+        marginRight: '10vw',
         marginBottom: '20px',
         float: 'left',
       },
@@ -252,19 +265,21 @@ class CityInfo extends React.Component {
         fontFamily: "'Roboto', sans-serif",
         color: grey50,
         fontSize: '2em',
-        marginLeft: '5vw',
-        marginRight: '5vw',
+        marginLeft: '10vw',
+        marginRight: '10vw',
       },
       chip: {
         margin: 4,
       },
       paper: {
-        height: 80,
-        width: 80,
-        margin: 8,
+        height: 60,
+        width: 60,
+        margin: 0,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        width: '50%',
+        margin: '0 auto',
         backgroundColor: blueGrey300,
       },
       chipGrow: {
@@ -327,6 +342,11 @@ class CityInfo extends React.Component {
       'Average high temperature (Celsius)': ['High Temperature', 'Average Fahrenheit', red500],
       'Average low temperature (Celsius)': ['Low Temperature', 'Average Fahrenheit', lightBlue500],
     };
+    const citySize = {
+      'POPULATION-SIZE' : ['Population', 'Million(s)'],
+      'POPULATION-UA-CENTER-DENSITY' : ['City Density', 'People/km²'],
+      'POPULATION-UA-DENSITY' : ['Metro Density', 'People/km²'],
+    };
     const context = this;
     return (
       <div>
@@ -349,6 +369,44 @@ class CityInfo extends React.Component {
               </div>
             </Paper>
           </MuiThemeProvider>
+        </div>
+        <div
+          style={styles.flexStyle}>
+          <div
+            style={this.props.width > 750 ? styles.centerStyle : styles.mobileCenterStyle}>
+            {
+              context.state.citySize.length > 0 ? context.state.citySize.map((city, index) =>
+                <div
+                  style={{
+                    textAlign: 'center',
+                    minWidth: 120}}>
+                  <Paper style={styles.paper} zDepth={1} circle={true} >
+                    <span
+                      style={styles.summary}>
+                      {city.id === 'POPULATION-SIZE' ? city.float_value.toFixed(2) : Math.floor(city.float_value)}
+                    </span>
+                  </Paper>
+                  <span
+                    style={{color: grey800, fontFamily: "'Roboto', sans-serif", fontSize: '1em'}}>
+                    {citySize[city.id][0]}
+                  </span>
+                  <br/>
+                  <span
+                    style={{color: grey600, fontFamily: "'Roboto', sans-serif", fontSize: '0.8em'}}>
+                    {citySize[city.id][1]}
+                  </span>
+                </div>
+              ) :
+                <span>
+                There is no city size information.
+              </span>
+            }
+            {
+              this.props.width > 750 ?
+                <div style={styles.emptyStyle}/> :
+                <div/>
+            }
+          </div>
         </div>
         {
           this.props.width > 750 ?
@@ -411,7 +469,11 @@ class CityInfo extends React.Component {
                     </Card>
                   </MuiThemeProvider>
                 </div>)}
-                <div style={styles.emptyStyle}/>
+                {
+                  this.props.width > 750 ?
+                    <div style={styles.emptyStyle}/> :
+                    <div/>
+                }
               </div>
             </div>
           :
@@ -463,7 +525,11 @@ class CityInfo extends React.Component {
                       style={{width: card[1] * 10 + '%', height: '2px', background: context.calculateColor(card[1])}}>
                     </div>
                     <Divider />
-                    <div style={styles.emptyStyle}/>
+                    {
+                      this.props.width > 750 ?
+                        <div style={styles.emptyStyle}/> :
+                        <div/>
+                    }
                   </div>)
                   }
                 </Paper>
@@ -473,6 +539,7 @@ class CityInfo extends React.Component {
         <div
           style={{padding: '20px', backgroundColor: blueGrey500}}>
           <span
+            id="costofliving"
             style={styles.subHeaderStyle}>
             Cost of Living
           </span>
@@ -480,7 +547,7 @@ class CityInfo extends React.Component {
         <div
           style={styles.flexStyle}>
           <div
-            style={styles.centerStyle}>
+            style={this.props.width > 750 ? styles.centerStyle : styles.mobileCenterStyle}>
               {
               context.state.colArray.map((colData, index) =>
                 <div
@@ -494,7 +561,7 @@ class CityInfo extends React.Component {
                           disabled={true}
                           rightAvatar={
                             <Avatar
-                              backgroundColor={pinkA200}
+                              backgroundColor={blueGrey300}
                             >{colData.currency_dollar_value > 1 ? '$' + Math.floor(colData.currency_dollar_value) : '$' + Math.ceil(colData.currency_dollar_value)}</Avatar>
                           }
                         />
@@ -503,12 +570,17 @@ class CityInfo extends React.Component {
                 </div>
               )
             }
-            <div style={styles.emptyStyle}/>
+            {
+              this.props.width > 750 ?
+                <div style={styles.emptyStyle}/> :
+                <div/>
+            }
           </div>
         </div>
         <div
           style={{padding: '20px', backgroundColor: blueGrey500}}>
           <span
+            id="climate"
             style={styles.subHeaderStyle}>
             Climate
           </span>
@@ -516,7 +588,7 @@ class CityInfo extends React.Component {
         <div
           style={styles.flexStyle}>
           <div
-            style={styles.centerStyle}>
+            style={this.props.width > 750 ? styles.centerStyle : styles.mobileCenterStyle}>
             {
               context.state.climate.map((climateData, index) =>
                 <div
@@ -541,7 +613,7 @@ class CityInfo extends React.Component {
                           />}
                       />
                       <CardText
-                        style={{minWidth: 200, height: this.props.width > 750 ? 150 : 100, position: 'relative', backgroundColor: climateLabels[climateData.label][2]}}>
+                        style={{minWidth: 200, height: this.props.width > 750 ? 125 : 75, position: 'relative', backgroundColor: climateLabels[climateData.label][2]}}>
                         <span
                           style={{right: -12, bottom: -40, position: 'absolute', fontFamily: "'Roboto Light', sans-serif", color: grey50, fontSize: '5em'}}>
                           {context.convertFormat(climateData.label, climateData[climateData.type+'_value'])}
@@ -552,12 +624,17 @@ class CityInfo extends React.Component {
                 </div>
               )
             }
-            <div style={styles.emptyStyle}/>
+            {
+              this.props.width > 750 ?
+                <div style={styles.emptyStyle}/> :
+                <div/>
+            }
           </div>
         </div>
         <div
           style={{padding: '20px', backgroundColor: blueGrey500}}>
           <span
+            id="housing"
             style={styles.subHeaderStyle}>
             Housing
           </span>
@@ -565,22 +642,22 @@ class CityInfo extends React.Component {
         <div
           style={styles.flexStyle}>
           <div
-            style={styles.centerStyle}>
+            style={this.props.width > 750 ? styles.centerStyle : styles.mobileCenterStyle}>
             {
               context.state.housingArray.length > 0 ? context.state.housingArray.map((house, index) =>
                 <div
                   style={styles.growStyle}>
                   <MuiThemeProvider>
                     <Card
-                      style={{margin: 8, backgroundColor: house.type !== 'float' ? pinkA200 : this.calculateColor(house.float_value * 10), overflow: 'hidden'}}>
+                      style={{margin: 8, backgroundColor: house.type !== 'float' ? blueGrey300 : this.calculateColor(house.float_value * 10), overflow: 'hidden'}}>
                       <ListItem
                         primaryText={house.label}
-                        secondaryText={house.type !== 'float' ? 'City Center' : this.calculateScoreStatus(house.float_value * 10)}
+                        secondaryText={house.type !== 'float' ? 'City Center' : this.calculateScoreStatus(house.float_value * 10, 1)}
                         disabled={true}
                         style={{backgroundColor: grey50}}
                       />
                       <CardText
-                        style={{minWidth: 200, height: this.props.width > 750 ? 150 : 100, position: 'relative', backgroundColor: house.type !== 'float' ? pinkA200 : this.calculateColor(house.float_value*10)}}>
+                        style={{minWidth: 200, height: this.props.width > 750 ? 125 : 75, position: 'relative', backgroundColor: house.type !== 'float' ? blueGrey300 : this.calculateColor(house.float_value*10)}}>
                         <span
                           style={{right: -12, bottom: -40, position: 'absolute', fontFamily: "'Roboto Light', sans-serif", color: grey50, fontSize: '5em'}}>
                           {house.float_value || '$' + house.currency_dollar_value}
@@ -594,32 +671,11 @@ class CityInfo extends React.Component {
                 There is no housing information.
               </span>
             }
-            <div style={styles.emptyStyle}/>
-          </div>
-        </div>
-        <div
-          style={{padding: '20px', backgroundColor: blueGrey500}}>
-          <span
-            style={styles.subHeaderStyle}>
-            City Size
-          </span>
-        </div>
-        <div
-          style={styles.flexStyle}>
-          <div
-            style={styles.centerStyle}>
             {
-              context.state.citySize.length > 0 ? context.state.citySize.map((city, index) =>
-                <div
-                  style={styles.growStyle}>
-                  {city.float_value}
-                </div>
-              ) :
-                <span>
-                There is no city size information.
-              </span>
+              this.props.width > 750 ?
+                <div style={styles.emptyStyle}/> :
+                <div/>
             }
-            <div style={styles.emptyStyle}/>
           </div>
         </div>
       </div>

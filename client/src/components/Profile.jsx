@@ -45,7 +45,6 @@ class Profile extends React.Component {
       question: false,
       profilePic: '',
       visibilityValue: false,
-      loading: false,
       spinner: true
     };
 
@@ -60,7 +59,6 @@ class Profile extends React.Component {
     this.handleOriginChange = this.handleOriginChange.bind(this);
     this.handleDestinationChange = this.handleDestinationChange.bind(this);
     this.handleDescribeChange = this.handleDescribeChange.bind(this);
-    this.async = this.async.bind(this);
   }
 
   componentDidMount() {
@@ -126,7 +124,6 @@ class Profile extends React.Component {
       .then(res => {
         this.props.dispatchCurrentUser(res.data);
         this.setState({
-          loading: false,
           originValue: res.data.origin,
           destinationValue: res.data.destination,
           describeValue: res.data.type,
@@ -180,13 +177,6 @@ class Profile extends React.Component {
       });
   }
 
-
-  async (cb) {
-    this.setState({loading: true}, () => {
-      this.asyncTimer = setTimeout(cb, 400);
-    });
-  }
-
   handleToggle () {
     this.setState({
       open: !this.state.open,
@@ -222,11 +212,6 @@ class Profile extends React.Component {
           visibilityValue: this.state.visibilityValue,
           visibilityUser: this.state.visibilityValue,
         }, this.getCityInfo );
-        if (!this.state.loading) {
-          this.async(() => this.setState({
-            loading: false,
-          }));
-        }
       });
     this.setState({snackBar: true, open: false}, this.getCityInfo);
   }
@@ -414,12 +399,10 @@ class Profile extends React.Component {
               style={styles.tabStyle}
             >
               <div>
-              <ExpandTransition loading={this.state.loading} open={true}>
                 <CityInfo formToggle={this.props.formToggle}
                           destinationCity={this.state.destinationUser}
                           width={this.state.width}
                           history={this.props.history} />
-              </ExpandTransition>
               </div>
             </Tab>
             <Tab
