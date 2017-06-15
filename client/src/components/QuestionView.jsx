@@ -93,7 +93,7 @@ class QuestionView extends React.Component {
     return (
       <div style={
         this.props.width > 750 ? {
-          width: '80%',
+          width: '84%',
           display: 'flex',
           flexFlow: 'row wrap',
           justifyContent: 'center',} :
