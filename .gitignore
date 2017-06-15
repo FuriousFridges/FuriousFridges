@@ -3,7 +3,6 @@ config/development.json
 config/production.json
 config/staging.json
 config/test.json
-config/custom-environment-variables.json
 
 .idea/workspace.xml
 

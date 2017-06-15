@@ -1,4 +1,4 @@
-{
+module.exports = {
   "passport": {
     "Google": {
       "clientID": "GOOGLE_CLIENT_ID",
@@ -38,6 +38,7 @@
   "Google": {
     "APIKey": "GOOGLE_API_KEY"
   },
+  
   "News": {
     "APIKey": "NEWS_API_KEY"
   }

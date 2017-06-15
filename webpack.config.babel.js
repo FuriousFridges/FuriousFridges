@@ -22,7 +22,14 @@ const config = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'GOOGLE_API_KEY': JSON.stringify(process.env.GOOGLE_API_KEY)
+      }
+    })
+  ]
 };
 
 export default config;

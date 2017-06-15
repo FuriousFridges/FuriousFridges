@@ -15,7 +15,7 @@ import IconButton from 'material-ui/IconButton';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 
 
-const GettingStartedGoogleMap = withGoogleMap(props => {
+const RenderGoogleMap = withGoogleMap(props => {
   return (
     <GoogleMap
       ref={props.onMapLoad}
@@ -93,7 +93,7 @@ class QuestionView extends React.Component {
     return (
       <div style={
         this.props.width > 750 ? {
-          width: '80%',
+          width: '84%',
           display: 'flex',
           flexFlow: 'row wrap',
           justifyContent: 'center',} :
@@ -119,7 +119,7 @@ class QuestionView extends React.Component {
             style={{right: 24, top: 24, position: 'absolute', }}>
             <ActionInfo />
           </IconButton>
-          <GettingStartedGoogleMap
+          <RenderGoogleMap
             containerElement={
               <div style={{ height: '500px' }} />
             }

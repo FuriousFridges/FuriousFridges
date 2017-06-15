@@ -1,6 +1,6 @@
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
-const redisClient = require('redis').createClient();
+const redisClient = require('redis').createClient(process.env.REDIS_URL) || require('redis').createClient();
 
 module.exports.verify = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -9,7 +9,7 @@ module.exports.verify = (req, res, next) => {
   res.redirect('/login');
 };
 
-module.exports.profileRedirect = (req,res,next) => {
+module.exports.profileRedirect = (req, res, next) => {
   if ( req.isAuthenticated()) {
     res.redirect('/profile');
   }
