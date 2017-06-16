@@ -46,9 +46,10 @@
     "passport-twitter": "^1.0.4",
     "path": "^0.12.7",
     "pg": "^6.1.5",
-    "react": "^15.4.2",
+    "react": "^15.5.0",
     "react-addons-css-transition-group": "^15.5.2",
-    "react-dom": "^15.4.2",
+    "react-addons-test-utils": "^15.6.0",
+    "react-dom": "^15.5.0",
     "react-google-button": "^0.3.0-alpha",
     "react-google-maps": "^6.3.0",
     "react-masonry-component": "^5.0.7",
@@ -83,6 +84,18 @@
   "babel": {
     "plugins": [
       "transform-es2015-modules-commonjs"
+    ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
     ]
   }
 }
