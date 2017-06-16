@@ -60,7 +60,7 @@ const Answer = (props) => {
     <div>
       <MuiThemeProvider>
         <ListItem
-          primaryText={<span style={{'fontSize': '20px'}}>{props.answer.body}<br /></span>}
+          primaryText={<p style={{'fontSize': '18px', 'lineHeight': '20px'}}>{props.answer.body}<br /></p>}
           secondaryText={`${props.answer.author} · ${props.answer.location} · ${postTime}`}
           disabled={true}
           leftAvatar={<Avatar src={props.answer.photoUrl} />}

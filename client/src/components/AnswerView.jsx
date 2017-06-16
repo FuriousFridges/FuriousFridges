@@ -52,8 +52,8 @@ const AnswerView = (props) => {
         <NavigationArrowBack />
       </IconButton>
       <CardHeader
-        title={<span style={{'fontSize': '20px'}}>{props.currentQuestion.body}<br /></span>}
-        subtitle={subtitle}
+        title={<p style={{'fontSize': '24px', 'lineHeight': '20px'}}>{props.currentQuestion.body}<br /></p>}
+        subtitle={<p style={{'marginTop': '5px'}}>{subtitle}</p>}
         avatar={props.currentQuestion.photoUrl}
       />
       <Divider/>

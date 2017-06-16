@@ -63,8 +63,8 @@ const Question = (props) => {
   return (
     <MuiThemeProvider>
       <ListItem
-        primaryText={<span style={{'fontSize': '20px'}}>{props.question.body}<br /></span>}
-        secondaryText={`${props.question.author} · ${props.question.location} · ${postTime}`}
+        primaryText={<p style={{'fontSize': '20px', 'lineHeight': '20px'}}>{props.question.body}<br /></p>}
+        secondaryText={<p style={{'marginTop': '5px'}}>{`${props.question.author} · ${props.question.location} · ${postTime}`}</p>}
         leftAvatar={<Avatar src={props.question.photoUrl} />}
         onTouchTap={answerQuestion}
         rightIconButton={iconMenu}
