@@ -40,6 +40,10 @@ const AnswerView = (props) => {
     postTime = 'More than a year ago';
   }
 
+  let subtitle = `${props.currentQuestion.author} · ${props.currentQuestion.location} · ${postTime}`;
+  if(subtitle.length > 60) {
+    subtitle = subtitle.slice(0, 60) + '...';
+  }
   return (
     <Card
       style={styles.cardStyle}>
@@ -49,7 +53,7 @@ const AnswerView = (props) => {
       </IconButton>
       <CardHeader
         title={<span style={{'fontSize': '20px'}}>{props.currentQuestion.body}<br /></span>}
-        subtitle={`${props.currentQuestion.author} · ${props.currentQuestion.location} · ${postTime}`}
+        subtitle={subtitle}
         avatar={props.currentQuestion.photoUrl}
       />
       <Divider/>

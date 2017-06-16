@@ -80,7 +80,7 @@ class Profile extends React.Component {
     let cityStateCountry = 'Anonymous location';
     let latitude = -37.297947;
     let longitude = -12.677656;
-    
+
     geolocator.config({
       language: 'en',
       google: {
@@ -88,6 +88,7 @@ class Profile extends React.Component {
         key
       }
     });
+
     var options = {
       enableHighAccuracy: false,
       timeout: 5000,
@@ -97,6 +98,7 @@ class Profile extends React.Component {
       timezone: false,         // requires Google API key if true
       staticMap: false        // map image URL (boolean or options object)
     };
+
     geolocator.locate(options, (err, location) => {
       if (err) {
         console.log('ERROR: Unable to resolve location! You may be blocking location services', err);
@@ -105,8 +107,65 @@ class Profile extends React.Component {
         let state = location.address.state || null;
         let country = location.address.country || null;
 
+        let states = {
+          'Alabama': 'AL',
+          'Alaska': 'AS',
+          'Arizona': 'AZ',
+          'Arkansas': 'AR',
+          'California': 'CA',
+          'Colorodo': 'CO',
+          'Connecticut': 'CT',
+          'Delaware': 'DE',
+          'Florida': 'FL',
+          'Georgia': 'GA',
+          'Hawaii': 'HI',
+          'Idaho': 'ID',
+          'Illinois': 'IL',
+          'Indiania': 'IN',
+          'Iowa': 'IA',
+          'Kansas': 'KS',
+          'Kentucky': 'KY',
+          'Louisiana': 'LA',
+          'Maine': 'ME',
+          'Maryland': 'MD',
+          'Massachusetts': 'MA',
+          'Michigan': 'MI',
+          'Minnesota': 'MN',
+          'Mississippi': 'MS',
+          'Missouri': 'MO',
+          'Montana': 'MT',
+          'Nebraska': 'NE',
+          'Nevada': 'NV',
+          'New Hampshire': 'NH',
+          'New Jersey': 'NJ',
+          'New Mexico': 'NM',
+          'New York': 'NY',
+          'North Carolina': 'NC',
+          'North Dakota': 'ND',
+          'Ohio': 'OH',
+          'Oklahoma': 'OK',
+          'Oregon': 'OR',
+          'Pennsylvania': 'PA',
+          'Rhode Island': 'RI',
+          'South Carolina': 'SC',
+          'South Dakota': 'SD',
+          'Tennessee': 'TN',
+          'Texas': 'TX',
+          'Utah': 'UT',
+          'Vermont': 'VT',
+          'Virginia': 'VA',
+          'Washington': 'WA',
+          'West Virginia': 'WV',
+          'Wisconsin': 'WI',
+          'Wyoming': 'WY'
+        };
+
         if (country === 'United States') {
           country = 'USA';
+        }
+
+        if (states.hasOwnProperty(state)) {
+          state = states[state];
         }
 
         if (city && state && country) {
