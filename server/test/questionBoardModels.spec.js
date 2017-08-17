@@ -5,12 +5,10 @@ const Answer = require('../../db/models/answers.js');
 const dbUtils = require('../../db/lib/utils.js');
 
 describe('Question board model tests', function () {
-  // Deletes all tables, creates new tables, and seeds tables with test data
   beforeEach(function (done) {
     dbUtils.rollbackMigrate(done);
   });
 
-  // Resets database back to original settings
   afterEach(function (done) {
     dbUtils.rollback(done);
   });

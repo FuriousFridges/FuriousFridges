@@ -20,7 +20,7 @@ module.exports.create = (req, res) => {
     visible: true 
   }).save()
     .then(result => {
-      res.status(201).send(result.attributes); //--Sending info from profiles
+      res.status(201).send(result.attributes); 
     })
     .catch(err => {
       if (err.constraint === 'users_email_unique') {

@@ -151,25 +151,6 @@ class NewUserForm extends React.Component {
       case 1:
         return (
           <div>
-            {/*<Subheader>Is there a name you would like us to call you?</Subheader>
-            <TextField
-              hintText="John"
-              floatingLabelText="First Name"
-              floatingLabelFixed={true}
-              defaultValue={this.state.firstName}
-              style={{width: '100%', marginLeft: '18px'}}
-              underlineFocusStyle={{borderColor: pinkA200}}
-              floatingLabelFocusStyle={{color: pinkA200}}
-            />
-            <TextField
-              hintText="Smith"
-              floatingLabelText="Last Name"
-              floatingLabelFixed={true}
-              defaultValue={this.state.lastName}
-              style={{width: '100%', marginLeft: '18px'}}
-              underlineFocusStyle={{borderColor: pinkA200}}
-              floatingLabelFocusStyle={{color: pinkA200}}
-            />*/}
             <Subheader>What would you describe yourself as?</Subheader>
             <MuiThemeProvider>
               <DropDownMenu value={this.state.describeValue} onChange={this.handleDescribeChange}>

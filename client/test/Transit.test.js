@@ -11,34 +11,3 @@ it('renders correctly', () => {
   expect(tree).toMatchSnapshot();
 });
 
-// describe('A suite to test the Transit component', () => {
-
-//   it('Expect Transit.jsx to render without throwing an error', () => {
-//      const wrapper = shallow(<Transit />);
-//       expect(wrapper).toMatchSnapshot();
-//    });
-// });
-
-
-
-// describe('A suite to test the Transit component', () => {
- 
-  // test('contains spec with an expectation', function() {
-  //   expect(true).toBeTruthy();
-  // });
-
-//   it('should render <Transit />', () => {
-//     const wrapper = shallow(<Transit />);
-//     expect(wrapper).toMatchSnapshot();
-//   });
-
-// });
-
-
-//   test('Transit component should render as expected', () => {
-//   const component = shallow(<Transit />)
-//   const tree = toJson(component)
-
-//   expect(tree).toMatchSnapshot()
-// })
-

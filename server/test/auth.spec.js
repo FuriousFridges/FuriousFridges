@@ -15,7 +15,6 @@ describe('Authentication', () => {
     dbUtils.rollbackMigrate(done);
   });
 
-  // Resets database back to original settings
   afterEach(function (done) {
     dbUtils.rollback(done);
   });
