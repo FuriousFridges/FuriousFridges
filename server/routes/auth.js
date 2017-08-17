@@ -14,7 +14,6 @@ router.route('/')
 router.route('/login')
   .get((req, res) => {
     res.sendFile(path.join(__dirname, '../../public/index.html'));
-    //res.render('../../public/index.html', { message: req.flash('loginMessage') });
   })
   .post(middleware.passport.authenticate('local-login', {
     successRedirect: '/profile',
@@ -37,9 +36,6 @@ router.route('/profile')
     res.sendFile(path.join(__dirname, '../../public/index.html'), {
       user: req.user
     });
-    /*res.render('profile.ejs', {
-      user: req.user // get the user out of session and pass to template
-    });*/
   });
 
 

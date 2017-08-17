@@ -403,16 +403,6 @@ class HomePage extends React.Component {
             </div>
           </div>
         </div>
-        {/*<div
-          style={styles.partialFlexStyle}>
-          <div
-            style={styles.parallaxThird}>
-            <p
-              style={styles.captionStyle}>
-              {captions[pictureSet[2]]}
-            </p>
-          </div>
-        </div>*/}
         <div
           style={{padding: '20px', backgroundColor: blueGrey400, textAlign: 'center'}}>
           <span

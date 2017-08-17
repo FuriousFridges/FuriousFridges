@@ -5,12 +5,10 @@ const Stats = require('../../db/models/cityinfo.js');
 
 
 describe('city info model tests', function () {
-  // Deletes all tables, creates new tables, and seeds tables with test data
   beforeEach(function (done) {
     dbUtils.rollbackMigrate(done);
   });
 
-  // Resets database back to original settings
   afterEach(function (done) {
     dbUtils.rollback(done);
   });
@@ -30,7 +28,6 @@ describe('city info model tests', function () {
         done();
       })
       .catch(function (err) {
-        // If this expect statement is reached, there's an error.
         done(err);
       });
   });
